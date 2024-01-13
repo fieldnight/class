@@ -4,12 +4,12 @@ import { useState } from "react";
 
 //event Handler with parameter(event), UseState instate doc
 
-//region  useState hooks
+//#region  useState hooks
 //useState는 react 라이브러리에서 제공하는 훅 중 하나로,
 //훅이란 함수 컴포넌트에서 상태(state)와 생명주기 기능을 사용할 수 있도록 도와주는 기능이다.
 //useState는 함수 컴포넌트 내에서 상태를 생성하고 관리한다.
 //이를 통해 컴포넌트가 상태를 가질 수 있으며, 상태의 변경이 일어날 때마다 React는 해당 컴포넌트를 다시 렌더링한다.
-//endregion
+//#endregion
 
 export default function SignupStatePage() {
   const [email, setEmail] = useState(""); //react 버전 상태 머신?
