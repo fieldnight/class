@@ -9,3 +9,5 @@ export default function BoardNewPage() {
 }
 
 //name="수정" , "작성" 보다 나은 방법.
+
+
