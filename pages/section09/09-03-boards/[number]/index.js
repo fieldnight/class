@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { styled } from "@emotion/styled";
-const { gql, useQuery } = require("@apollo/client");
+
+import { gql,useQuery } from "@apollo/client";
+
 
 const FETCH_BOARD = gql`
   query fetchBoard($number: Int) {

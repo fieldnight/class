@@ -23,10 +23,11 @@ export default function BoardWrite(props) {
   const onClickUpdate = async () => {
     const UpdateResult = await updateBoard({
       variables: {
-      number: Number(router.query.number),
-      writer: writer,
-      title: title,
-      contents: content,}
+        number: Number(router.query.number),
+        writer: writer,
+        title: title,
+        contents: content,
+      },
     });
 
     console.log(UpdateResult);
@@ -59,11 +60,11 @@ export default function BoardWrite(props) {
   };
 
   const onChangeTitle = (event) => {
-    setTitle = event.target.value;
+    setTitle(event.target.value);
   };
 
   const onChangeContents = (event) => {
-    setContent = event.target.content;
+    setContent(event.target.value);
   };
 
   return (
