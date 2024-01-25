@@ -36,6 +36,10 @@ export default function BoardWrite(props) {
       myvariables.title = title;
     }
 
+    /*하나를 수정하면 나머지들이 없어지는 등의 문제를 해결하기 위한 코드. onChange가 state와 연결되어있어 변경값이 없는 경우 '공백' 으로 인식하는 듯 하다. 
+    
+    state 초기값 ("")에 defaultValue를 넣는 방법도 있으나 이는 다른 데이터를 수정해도 건들지 않은 값도 같이 db로 올라가서 비효율적. 그래서 함수를 하나 만들어 값 변경이 있을 경우만 함수에 올려서 DB로 쏘아보낸다.*/
+
     const UpdateResult = await updateBoard({
       variables: myvariables,
 
