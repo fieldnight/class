@@ -60,11 +60,11 @@ export default function BoardWrite(props) {
   };
 
   const onChangeTitle = (event) => {
-    setTitle = event.target.value;
+    setTitle(event.target.value);
   };
 
   const onChangeContents = (event) => {
-    setContent = event.target.content;
+    setContent(event.target.value);
   };
 
   return (
@@ -72,7 +72,7 @@ export default function BoardWrite(props) {
       <BoardWriteUI
         submit={onClickSubmit}
         update={onClickUpdate}
-        writer={onChangeWriter}
+        write={onChangeWriter}
         title={onChangeTitle}
         content={onChangeContents}
         isEdit={props.isEdit}

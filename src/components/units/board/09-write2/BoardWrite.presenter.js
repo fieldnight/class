@@ -9,7 +9,7 @@ export default function BoardWriteUI(props) {
         type="text"
         placeholder="작성자를 입력하세요"
         onChange={props.write}
-        defaultValue={props.data ? props.data.fetchBoard.writer : "맹"}
+        defaultValue={props.data ? props.data.fetchBoard.writer : " "}
       ></RedInput>
       <br></br>
       제목
@@ -24,8 +24,8 @@ export default function BoardWriteUI(props) {
       <input
         type="text"
         placeholder="내용을 입력하세요"
-        onChange={props.contents}
-        defaultValue={props.data ? props.data.fetchBoard.contents : "밍"}
+        onChange={props.content}
+        defaultValue={props.data ? props.data.fetchBoard.contents : " "}
       ></input>
       <BlueBtn onClick={props.isEdit ? props.update : props.submit}>
         {props.isEdit ? "수정" : "등록"} 하기
