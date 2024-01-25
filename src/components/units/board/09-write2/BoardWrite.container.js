@@ -21,13 +21,25 @@ export default function BoardWrite(props) {
   //updateBoard의 객체화 : 객체화가 필요한 이유는 메모장에 작성
 
   const onClickUpdate = async () => {
+    const myvariables = {
+      number: Number(router.query.number),
+    };
+    if (writer /*!== "" 결국 생략해도 써도 둘 다 T/F임.*/) {
+      //변경된 값이 없을 경우. 해당 비교군은 state함수이다.
+      myvariables.writer = writer;
+    }
+
+    if (content) {
+      myvariables.contents = content;
+    }
+    if (title) {
+      myvariables.title = title;
+    }
+
     const UpdateResult = await updateBoard({
-      variables: {
-        number: Number(router.query.number),
-        writer: writer,
-        title: title,
-        contents: content,
-      },
+      variables: myvariables,
+
+      //단일값을 보내니 괄호를 쓰지 않아도 된다.
     });
 
     console.log(UpdateResult);
@@ -72,9 +84,9 @@ export default function BoardWrite(props) {
       <BoardWriteUI
         submit={onClickSubmit}
         update={onClickUpdate}
-        write={onChangeWriter}
-        title={onChangeTitle}
-        content={onChangeContents}
+        onChangeWriter={onChangeWriter}
+        onChangeTitle={onChangeTitle}
+        onChangeContents={onChangeContents}
         isEdit={props.isEdit}
         data={props.data} //undefined이거나, data이거나 둘 중 하나!
       />

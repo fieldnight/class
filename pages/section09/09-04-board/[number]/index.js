@@ -36,7 +36,7 @@ export default function DynamicRoutedPage() {
       <div>제목: {data ? data.fetchBoard?.title : "로딩중.."} </div>
       <div>작성자:{data ? data.fetchBoard?.writer : "로딩중.."}</div>
       <div>
-        내용: {data?.fetchBoard?.contents}
+        내용: {data ? data.fetchBoard?.contents : "로딩중"}
         <br></br> <button onClick={onClickMove}>수정!하기 </button>
       </div>
     </>

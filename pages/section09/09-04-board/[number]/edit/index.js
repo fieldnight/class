@@ -23,7 +23,7 @@ export default function GraphqlMutationPage(props) {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { number: Number(router.query.number) },
   });
-
+//
   return (
     <>
       <div>수정하기 페이지 입니다. </div>
