@@ -1,6 +1,8 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import LayOut from "../src/components/commons/layout";
 import type { AppProps } from "next/app";
+//import ApolloProvider from "../src/components/commons/apollo"
+
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 export default function App({ Component }: AppProps): JSX.Element {
   const client = new ApolloClient({
@@ -8,6 +10,8 @@ export default function App({ Component }: AppProps): JSX.Element {
     cache: new InMemoryCache(),
     // 컴퓨터 메모리에 백엔드에서 받아온 데이터 임시 저장.
   });
+
+  //아폴로 클라이언트란 설정을 클라이언트에 저장하고, 이걸 아폴로 프로바이더에 넘겨주므로서 이 자식들이 유즈쿼리, 유즈뮤테이션을 쓸 수 있게 된다. 아폴로 라이브러리의 설정들을 앱 컴포넌트에서 직접 적용하고 있는데, 나중에 이런 설정 라이브러리가 굉장히 많아져서 하나하나 입력하는 방식을 계속 쓰게 되면 앱 컴포넌트의 가독성과 효율성이 떨어지게 된다. => 목적이 유사한 라이브러리끼리 묶어서 새로운 컴포넌트로 분리한 후, "쏙 들어오기, 떙겨오기 전법,,"으로 가져오자.
 
   //GraphQL setting
   return (
@@ -18,6 +22,7 @@ export default function App({ Component }: AppProps): JSX.Element {
           <Component />
         </LayOut>
       </ApolloProvider>
+
       <div>______________app.js의 컴포넌트 끝부분입니다.____________ </div>
     </>
   );
