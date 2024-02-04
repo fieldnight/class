@@ -1,6 +1,8 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import LayOut from "../src/components/commons/layout";
+import type { AppProps } from "next/app";
 
-export default function App({ Component} , {pageProps }) {
+export default function App({ Component }: AppProps): JSX.Element {
   const client = new ApolloClient({
     uri: "http://backend-example.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(),
@@ -8,24 +10,21 @@ export default function App({ Component} , {pageProps }) {
   });
 
   //GraphQL setting
-
   return (
     <>
-      <div>app.js의 컴포넌트 시작부분입니다. </div>
+      <div>_____________app.js의 컴포넌트 시작부분입니다.____________ </div>
       <ApolloProvider client={client}>
-        {" "}
-          위의 client. 문자 바꿔도 됨
-          <br></br>
-        <Component {...pageProps} />
+        <LayOut>
+          <Component />
+        </LayOut>
       </ApolloProvider>
-      <div>app.js의 컴포넌트 끝부분입니다. </div>
+      <div>______________app.js의 컴포넌트 끝부분입니다.____________ </div>
     </>
   );
 
-  //위의 설정을 <Apollo전달자에 감싸서>컴포넌트에 전달해줘야한다.
+  //위의 설정을 <Apollo전달자에 감싸서!!>컴포넌트에 전달해줘야한다.
 }
 
-//#region notice
 /*
 1. url이 아닌 uri. 
 2. uri은 받아온 데이터를 저장해놓으려는 성격을 지닌다. 
@@ -37,5 +36,3 @@ export default function App({ Component} , {pageProps }) {
 
 7. react는 컴포넌트 조립방식이다. 바닐라 js에서는 index 하나 당 페이지였다면 react에서는 여러 기능으로 잘게 쪼개진 index를 조립하여 최종적으로 페이지를 구현한다. import / export를 통해서 ! 
  */
-
-//#endregion
