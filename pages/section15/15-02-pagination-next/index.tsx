@@ -1,7 +1,8 @@
 //08-02 DB 주소 변경 : ( 08:example => 15: practice)
-
-import { useQuery, gql } from "@apollo/client";
+//15-01 pagination에 < > 페이지 이동바 추가
+import { useQuery, gql, useMutation } from "@apollo/client";
 import type { MouseEvent } from "react";
+import { useState } from "react";
 import type {
   IQuery,
   IQueryFetchBoardArgs,
@@ -19,32 +20,30 @@ const FETCH_BOARDS = gql`
 `;
 // number => id 변경
 
-const DELETE_BOARD = gql`
-  mutation deleteBoard($number: Int) {
-    deleteBoard(number: $number) {
-      message
-    }
-  }
-`;
-//변수로 다시 바꿔야하니 $쓰면 된다. 변수값을 받을 때는 해당 변수의 타입도 지정해야한다.
-
 export default function StaticRoutedPage() {
+  const [startPage, setStartPage] = useState(1);
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardArgs
   >(FETCH_BOARDS);
 
   console.log("data", data?.fetchBoards);
-  const myStyles = { margin: "10px", padding: "10px 0" };
 
   const onClickPage = (event: MouseEvent<HTMLButtonElement>): void => {
     void refetch({ page: Number(event.currentTarget.id) });
   };
 
-  /*const onClickPage= async():Promise<void>=>{
-    const Result =  await refetch({ page: 1});
-   console.log(Result); //이때는 콘솔 정보를 위해 비동기를 사용 }
-  */
+  const onClickPrevPage = () => {
+    setStartPage(startPage - 10);
+    void refetch({ page: startPage - 10 });
+  };
+
+  const onClickNextPage = (): void => {
+    setStartPage(startPage + 10);
+    void refetch({ page: startPage + 10 });
+  };
+
+  const myStyles = { margin: "10px", padding: "10px 0" };
 
   return (
     <div>
@@ -56,15 +55,25 @@ export default function StaticRoutedPage() {
         </div>
       ))}
 
+      <button onClick={onClickPrevPage} style={{ margin: "5px" }}>
+        이전페이지
+      </button>
       {new Array(10).fill(1).map((_, index) => (
-        <button key={index + 1} id={String(index + 1)} onClick={onClickPage}>
-          {index + 1}
+        <button
+          style={{ margin: "3px" }}
+          key={index + startPage}
+          id={String(index + startPage)}
+          onClick={onClickPage}
+        >
+          {index + startPage}
         </button>
       ))}
+      <button onClick={onClickNextPage} style={{ margin: "5px" }}>
+        다음페이지
+      </button>
     </div>
   );
 }
-
 /*
 1. pagination SETTING 
    el._id가 없다는 에러가 뜬다. TS codeGen의 참조 주소가 기존 example로 되어 있기에 practice fetchBoard의 바뀐 요소를 인식하지 못함. TS로 인해 에러를 찾을 수 있었다. 
