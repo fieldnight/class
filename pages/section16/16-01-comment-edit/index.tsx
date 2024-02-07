@@ -1,4 +1,5 @@
 //08-02 DB 주소 변경 : ( 08:example => 15: practice)
+//pagination 제거, 수정 버튼 클릭 => 인풋 창으로 전환
 
 import { useQuery, gql } from "@apollo/client";
 import { useState } from "react";
@@ -25,7 +26,7 @@ export default function StaticRoutedPage() {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardArgs>(
     FETCH_BOARDS
   );
- 
+
   const onClickEdit = (event: MouseEvent<HTMLButtonElement>): void => {
     setEditIndex(Number(event.currentTarget.id));
     console.log("id:", event.currentTarget.id);
