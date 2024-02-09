@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this의 이해</title>
+
+    <script>
+      //HTML로 버튼 만들기
+      class ClassCounterPage {
+        count = 10;
+
+        onClickCountUp() {
+          console.log("현재 카운트", this.count);
+          /*
+          1. 여기서의 this는 버튼을 클릭한 순간 버튼에 달려 있는 아래쪽의 count를 찾아간다. 위쪽의 count는 무시된다. 
+          
+          2.만약 this.onClickCountUp에 this를 바인딩 할 경우, 기존에 있던 this(count = 10)과 연결된다. 주체가 버튼이 아니게 된다. 
+          */
+        }
+        render() {
+          //jsx로 입력한 <button onClick={}>..</button>부분은
+          const button = document.createElement("button");
+          button.count = 100; //추가
+          button.innerText = "카운트 올리기!";
+          button.addEventListener("click", this.onClickCountUp.bind(this)); //버튼이 클릭되기까지 listen(기다려) 주세요
+          document.body.appendChild(button);
+          //이런 형식으로 자동 변환된다.
+        }
+      }
+
+
+      class ClassCounterPage2 {
+        count = 10;
+
+        onClickCountUp2=()=> { //눈에 보이는 this를 바로 쓰겠다는 의미. 바인딩 필요X
+          console.log("현재 카운트", this.count);
+        
+        }
+        render() {
+         
+          const button = document.createElement("button");
+          button.count = 100; //추가
+          button.innerText = "카운트 올리기!";
+          button.addEventListener("click", this.onClickCountUp2)
+          document.body.appendChild(button);
+          //이런 형식으로 자동 변환된다.
+        }
+      }
+
+      //여기까지 설명서
+
+      window.onload = () =>   {
+        const counter = new ClassCounterPage();
+        counter.render();
+      };
+      //객체 생성
+
+      //그러나 실행되지 않는다. this는 실행 주체에 따라 달라지기 때문.
+    </script>
+  </head>
+  <body></body>
+</html>
