@@ -12,7 +12,7 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `;
 
-export default function LoginPage(): JSX.Element {
+export default function LoginPage() {
   const router = useRouter();
 
   const { data } =
@@ -26,5 +26,5 @@ export default function LoginPage(): JSX.Element {
     }
   }, []);
 
-  return <>{data?.fetchUserLoggedIn.name}님 환영합니다!</>;
+  //return <>{data?.fetchUserLoggedIn.name}님 환영합니다!</>;
 }
