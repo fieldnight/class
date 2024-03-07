@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { wrapAsync } from "../../../src/commons/libraries/asyncFunc";
+import { wrapFormAsync } from "../../../src/commons/libraries/asyncFunc";
 
 interface IFormData {
   writer: string;
@@ -28,7 +28,7 @@ export default function graphQLInputPage(): JSX.Element {
   );
 
   return (
-    <form onSubmit={wrapAsync(handleSubmit(onClickSubmit))}>
+    <form onSubmit={wrapFormAsync(handleSubmit(onClickSubmit))}>
       <hr></hr>
       작성자
       <input type="text" {...register("writer")}></input>
