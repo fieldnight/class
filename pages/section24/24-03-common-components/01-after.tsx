@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { wrapFormAsync } from "../../../src/commons/libraries/asyncFunc";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { mySchema } from "./01-after.validation";
-import input01 from './../../../src/commons/inputs/01/index';
+import Input01 from "../../../src/components/commons/inputs/01";
+import Button01 from "../../../src/components/commons/buttons/01";
 
 interface IFormData {
   writer: string;
@@ -38,7 +39,7 @@ export default function graphQLInputPage(): JSX.Element {
   return (
     <form onSubmit={wrapFormAsync(handleSubmit(onClickSubmit))}>
       <hr></hr>
-      작성자 <input01 qqq= {register("writer")}/>
+      작성자 <Input01 register={register("writer")} />
       <div style={{ color: "red" }}>
         {formState.errors.writer?.message}
       </div>{" "}
@@ -53,9 +54,7 @@ export default function graphQLInputPage(): JSX.Element {
       <div style={{ color: "red" }}>{formState.errors.contents?.message}</div>
       {/*주소
       <input type="text" {...register("boardAddress.addressDetail")}></input>*/}
-      <button style={{ backgroundColor: formState.isValid ? "yellow" : "" }}>
-        GRAPHQL-API요청
-      </button>
+      <Button01 title="등록하기" isActive={formState.isValid}></Button01>
       <hr></hr>
     </form>
   );
